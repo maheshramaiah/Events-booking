@@ -1,0 +1,33 @@
+{
+  "name": "graphql",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "debug": "nodemon --debug server.js"
+  },
+  "keywords": [],
+  "author": "Mahesh Ramaiah",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^3.0.6",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "express-graphql": "^0.8.0",
+    "graphql": "^14.3.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^3.2.6"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  },
+  "nodemonConfig": {
+    "env": {
+      "MONGO_DB_USER": "Mahesh0084",
+      "MONGO_DB_PASSWORD": "mahesh_0084",
+      "MONGO_DB": "events_booking",
+      "JWT_KEY": "secret_1234"
+    }
+  }
+}
