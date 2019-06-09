@@ -1,11 +1,12 @@
 const { GraphQLObjectType } = require('graphql');
-const auth = require('./auth');
-const event = require('./events');
+const { signup, signin } = require('./auth');
+const createEvent = require('./events');
 
 module.exports = new GraphQLObjectType({
   name: 'RootMutation',
   fields: {
-    createUser: auth,
-    createEvent: event
+    signup,
+    signin,
+    createEvent
   }
 });

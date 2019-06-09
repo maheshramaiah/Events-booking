@@ -18,7 +18,8 @@ module.exports = {
     contentBase: path.join(__dirname, 'src'),
     proxy: {
       '/graphql': 'http://localhost:3000'
-    }
+    },
+    historyApiFallback: true
   },
   module: {
     rules: [
@@ -38,6 +39,14 @@ module.exports = {
           },
           {
             loader: 'sass-loader'
+          }
+        ]
+      },
+      {
+        test: /\.(eot|svg|ttf|woff|woff2)$/,
+        use: [
+          {
+            loader: 'file-loader'
           }
         ]
       }

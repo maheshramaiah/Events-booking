@@ -1,11 +1,11 @@
 const { GraphQLObjectType } = require('graphql');
-const auth = require('./auth');
+const user = require('./user');
 const events = require('./events');
 
 module.exports = new GraphQLObjectType({
   name: 'RootQuery',
   fields: {
-    auth,
+    user,
     events
   }
 });

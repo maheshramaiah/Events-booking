@@ -11,8 +11,8 @@ module.exports = {
 
         if (user) {
           req.user = {
-            id,
-            email
+            id: user._id,
+            email: user.email
           };
           req.isAuthenticated = true;
         }

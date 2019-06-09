@@ -11,10 +11,12 @@
   "devDependencies": {
     "@babel/core": "^7.3.3",
     "@babel/node": "^7.2.2",
+    "@babel/plugin-transform-runtime": "^7.4.4",
     "@babel/preset-env": "^7.3.1",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.5",
     "css-loader": "^1.0.0",
+    "file-loader": "^4.0.0",
     "node-sass": "^4.11.0",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.0",
@@ -23,10 +25,14 @@
     "webpack-dev-server": "^3.6.0"
   },
   "dependencies": {
+    "@babel/runtime": "^7.4.5",
     "apollo-boost": "^0.4.1",
     "graphql": "^14.3.1",
+    "history": "^4.9.0",
     "react": "^16.8.6",
     "react-apollo": "^2.5.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "react-router-dom": "^5.0.1",
+    "styled-components": "^4.3.0"
   }
 }

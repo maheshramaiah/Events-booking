@@ -2,10 +2,10 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const graphqlHTTP = require('express-graphql');
 const { GraphQLSchema } = require('graphql');
-const query = require('./graphql/query');
-const mutation = require('./graphql/mutation');
-const db = require('./db');
-const { authenticateUser } = require('./middleware');
+const query = require('./server/graphql/query');
+const mutation = require('./server/graphql/mutation');
+const db = require('./server/db');
+const { authenticateUser } = require('./server/middleware');
 
 const app = express();
 const port = process.env.PORT || 3000;
