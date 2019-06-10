@@ -1,28 +1,15 @@
 import React, { useState } from 'react';
 import { Mutation } from 'react-apollo';
 import { Input, Button } from '../../components';
-import { useAuth } from '../../contexts/AuthContext';
-import history from '../../history';
 import { SIGN_UP } from '../../query';
+import useAuthSubmit from './useAuthSubmit';
 import { LoginWrap, Header, Form, Error } from './styles';
 
 function Signup() {
-  const [user, dispatch] = useAuth();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [loginErr, setLoginErr] = useState('');
-
-  function onSuccess({ signup }) {
-    dispatch({ type: 'login', token: signup });
-    history.push('/');
-  }
-
-  function onError(err) {
-    const errors = err.graphQLErrors.map(e => e.message);
-
-    setLoginErr(errors || err.message);
-  }
+  const { disableSubmit, err, onSuccess, onError } = useAuthSubmit([name, email, password]);
 
   return (
     <Mutation
@@ -56,10 +43,10 @@ function Signup() {
                 label='Password'
                 type='password'
               />
-              <Button disabled={!name || !email || !password} onClick={signup}>
+              <Button disabled={disableSubmit} onClick={signup}>
                 Sign up
               </Button>
-              {loginErr && <Error>{loginErr}</Error>}
+              {err && <Error>{err}</Error>}
             </Form>
           </LoginWrap>
         )

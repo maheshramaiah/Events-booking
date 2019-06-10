@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Query } from 'react-apollo';
 import { useAuth } from '../../contexts/AuthContext';
 import history from '../../history';
@@ -23,21 +23,21 @@ function Header() {
 
   function renderSignButtons() {
     return (
-      <React.Fragment>
+      <Fragment>
         <span onClick={login}>Log in</span>
         <span className="seperator"> | </span>
         <span onClick={signup}>Sign up</span>
-      </React.Fragment>
+      </Fragment>
     );
   }
 
   function renderProfile() {
     return (
-      <Query query={USER_INFO}>
+      <Query query={USER_INFO} fetchPolicy={'network-only'} onCompleted={(({ user }) => !user && logout())}>
         {
           ({ loading, error, data }) => (
             <div>
-              {!loading && !error && data && <span>{data.user.name}</span>}
+              {!loading && !error && data.user && <span>{data.user.name}</span>}
               <span className="seperator"> | </span>
               <span onClick={logout}>Log out</span>
             </div>

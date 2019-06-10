@@ -28,7 +28,6 @@ const Body = styled.div`
 `;
 
 function App() {
-
   return (
     <ApolloProvider client={client}>
       <AuthProvider>

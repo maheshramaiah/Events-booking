@@ -1,5 +1,4 @@
 const { GraphQLNonNull, GraphQLString } = require('graphql');
-const { UserType } = require('../types');
 const { addUser, verifyUser } = require('../../service/auth');
 
 module.exports = {
