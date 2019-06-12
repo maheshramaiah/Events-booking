@@ -52,18 +52,10 @@ export const GET_EVENTS = gql`
       name,
       description,
       startDate,
-      endDate
       location {
-        address,
-        lat,
-        lng
+        address
       },
-      participants,
-      creator {
-        id,
-        email,
-        name
-      }
+      participants
     }
   }
 `;

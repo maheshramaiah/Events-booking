@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { Mutation } from 'react-apollo';
 import history from '../../history';
 import { Input, DatePicker, TimePicker, MockPlace, Button } from '../../components';
-import { CREATE_EVENT } from '../../query';
+import { CREATE_EVENT, GET_EVENTS } from '../../query';
 import { useValidation } from './useValidation';
 import { Container, DateTime, ButtonWrap, Error } from './styles';
 
@@ -32,7 +32,7 @@ function CreateEvent() {
     }
   }
 
-  function onSuccess(data) {
+  function onSuccess() {
     history.push('/');
   }
 
@@ -50,6 +50,7 @@ function CreateEvent() {
       variables={getPayload()}
       onCompleted={onSuccess}
       onError={onError}
+      refetchQueries={[{ query: GET_EVENTS }]}
     >
       {
         (createEvent, { loading, error }) => (

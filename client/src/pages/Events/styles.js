@@ -24,6 +24,8 @@ export const Bar = styled.div`
   padding: 5px 20px;
   min-height: 50px;
   margin-top: -20px;
+  position: sticky;
+  top: 70px;
 `;
 
 export const EventCreate = styled.h4`
@@ -41,4 +43,30 @@ export const EventCreate = styled.h4`
 
 export const Page = styled.div`
   padding: 10px 0;
+`;
+
+export const EventList = styled.ul`
+  list-style-type: none;
+  padding: 0;
+
+  li {
+    margin-bottom: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+`;
+
+export const Name = styled.h3`
+  margin: 0;
+`;
+
+export const Content = styled.p`
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 16px;
+  margin: 5px 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `;
