@@ -3,18 +3,13 @@ const { getUser } = require('../../service/auth');
 
 module.exports = {
   type: UserType,
-  async resolve(_, args, context) {
+  resolve(_, args, context) {
     try {
       if (!context.isAuthenticated) {
         return null;
       }
 
-      const user = await getUser(context.user.email);
-
-      return {
-        ...user,
-        id: user._id
-      }
+      return getUser(context.user.id);
     }
     catch (err) {
       return err;

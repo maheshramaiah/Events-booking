@@ -33,7 +33,7 @@ function Header() {
 
   function renderProfile() {
     return (
-      <Query query={USER_INFO} fetchPolicy={'network-only'} onCompleted={(({ user }) => !user && logout())}>
+      <Query query={USER_INFO} fetchPolicy={'network-only'} onCompleted={({ user }) => !user && logout()} onError={logout}>
         {
           ({ loading, error, data }) => (
             <div>

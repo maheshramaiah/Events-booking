@@ -1,35 +1,20 @@
-const { Event, EventInput } = require('../types');
-const { EVENT } = require('../../db/collections');
-const { insertOne } = require('../../db/dataAccess');
+const { EventType, EventInputType } = require('../types');
+const { createEvent } = require('../../service/event');
 
 module.exports = {
-  type: Event,
+  type: EventType,
   args: {
     eventInput: {
-      type: EventInput
+      type: EventInputType
     }
   },
-  async resolve(_, args, context) {
+  resolve(_, args, context) {
     try {
       if (!context.isAuthenticated) {
         throw new Error('Not authenticated');
       }
 
-      const { name, description, date, coordinates } = args.eventInput;
-      const event = {
-        name,
-        description,
-        date,
-        coordinates,
-        creator: context.user.id,
-        participants: []
-      };
-      const res = await insertOne(EVENT, event);
-
-      return {
-        ...event,
-        id: res.insertedId
-      };
+      return createEvent(args.eventInput, context.user.id);
     }
     catch (err) {
       return err;

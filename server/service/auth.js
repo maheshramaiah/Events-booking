@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const ObjectId = require('mongodb').ObjectID;
 const { insertOne, findOne } = require('../db/dataAccess');
 const { AUTHENTICATION } = require('../db/collections');
 const JWT_SECRET = process.env.JWT_KEY;
@@ -53,9 +54,14 @@ async function verifyUser({ email, password }) {
   }
 }
 
-async function getUser(email) {
+async function getUser(id) {
   try {
-    return await findOne(AUTHENTICATION, { email });
+    const user = await findOne(AUTHENTICATION, { _id: new ObjectId(id) });
+
+    return {
+      id: user._id,
+      ...user
+    };
   }
   catch (err) {
     return err;

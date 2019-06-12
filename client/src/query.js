@@ -21,3 +21,49 @@ export const USER_INFO = gql`
     }
   }
 `;
+
+export const CREATE_EVENT = gql`
+  mutation CreateEvent($eventInput: EventInput) {
+    createEvent(eventInput: $eventInput) {
+      id,
+      name,
+      description,
+      startDate,
+      endDate,
+      location {
+        address,
+        lat,
+        lng
+      },
+      participants,
+      creator {
+        id,
+        email,
+        name
+      }
+    }
+  }
+`;
+
+export const GET_EVENTS = gql`
+  query {
+    events {
+      id,
+      name,
+      description,
+      startDate,
+      endDate
+      location {
+        address,
+        lat,
+        lng
+      },
+      participants,
+      creator {
+        id,
+        email,
+        name
+      }
+    }
+  }
+`;

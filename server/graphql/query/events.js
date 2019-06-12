@@ -1,21 +1,10 @@
 const { GraphQLList } = require('graphql');
-const { Event } = require('../types');
-const { EVENT } = require('../../db/collections');
-const { find } = require('../../db/dataAccess');
+const { EventType } = require('../types');
+const { getEvents } = require('../../service/event');
 
 module.exports = {
-  type: new GraphQLList(Event),
+  type: new GraphQLList(EventType),
   async resolve() {
-    try {
-      const events = await find(EVENT, {});
-
-      return events.map(event => ({
-        ...event,
-        id: event._id
-      })); 
-    }
-    catch (err) {
-      return err;
-    }
+    return getEvents();
   }
 };

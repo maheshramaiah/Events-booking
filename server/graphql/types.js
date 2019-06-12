@@ -7,9 +7,7 @@ const {
   GraphQLList,
   GraphQLFloat
 } = require('graphql');
-const ObjectId = require('mongodb').ObjectID;
-const { AUTHENTICATION } = require('../db/collections');
-const { findOne } = require('../db/dataAccess');
+const { getUser } = require('../service/auth');
 
 const UserType = new GraphQLObjectType({
   name: 'User',
@@ -20,23 +18,32 @@ const UserType = new GraphQLObjectType({
   })
 });
 
+const Location = {
+  fields: {
+    address: { type: new GraphQLNonNull(GraphQLString) },
+    lat: { type: new GraphQLNonNull(GraphQLFloat) },
+    lng: { type: new GraphQLNonNull(GraphQLFloat) }
+  }
+};
+
 const EventType = new GraphQLObjectType({
   name: 'Event',
   fields: () => ({
     id: { type: new GraphQLNonNull(GraphQLID) },
     name: { type: new GraphQLNonNull(GraphQLString) },
     description: { type: GraphQLString },
-    date: { type: new GraphQLNonNull(GraphQLString) },
-    coordinates: { type: new GraphQLNonNull(GraphQLList(GraphQLFloat)) },
+    startDate: { type: new GraphQLNonNull(GraphQLString) },
+    endDate: { type: new GraphQLNonNull(GraphQLString) },
+    location: {
+      type: new GraphQLObjectType({
+        name: 'Location',
+        ...Location
+      })
+    },
     creator: {
       type: UserType,
-      async resolve(parent) {
-        const user = await findOne(AUTHENTICATION, { _id: new ObjectId(parent.creator) });
-
-        return {
-          ...user,
-          id: user._id
-        };
+      resolve(parent) {
+        return getUser(parent.creator);
       }
     },
     participants: { type: new GraphQLList(GraphQLID) }
@@ -48,13 +55,19 @@ const EventInputType = new GraphQLInputObjectType({
   fields: () => ({
     name: { type: new GraphQLNonNull(GraphQLString) },
     description: { type: GraphQLString },
-    date: { type: new GraphQLNonNull(GraphQLString) },
-    coordinates: { type: new GraphQLNonNull(GraphQLList(GraphQLFloat)) }
+    startDate: { type: new GraphQLNonNull(GraphQLString) },
+    endDate: { type: new GraphQLNonNull(GraphQLString) },
+    location: {
+      type: new GraphQLInputObjectType({
+        name: 'LocationInput',
+        ...Location
+      })
+    }
   })
 });
 
 module.exports = {
   UserType,
-  Event: EventType,
-  EventInput: EventInputType
+  EventType,
+  EventInputType
 };

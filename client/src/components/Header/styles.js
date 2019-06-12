@@ -9,6 +9,7 @@ export const HeaderWrap = styled.div`
   padding: 10px;
   box-sizing: border-box;
   top: 0;
+  z-index: 1;
 `;
 
 export const FloatRight = styled.div`

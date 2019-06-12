@@ -17,6 +17,10 @@ export const Header = styled.h4`
 export const Form = styled.div`
   padding: 15px;
   box-sizing: 'border-box';
+
+  button {
+    margin-top: 10px;
+  }
 `;
 
 export const Error = styled.span`
