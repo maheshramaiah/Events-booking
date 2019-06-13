@@ -9,6 +9,7 @@ import Header from './components/Header';
 import Signin from './pages/Auth/signin';
 import Signup from './pages/Auth/signup';
 import Events from './pages/Events';
+import EventDetail from './pages/EventDetail';
 import CreateEvent from './pages/CreateEvent';
 import './styles.scss';
 
@@ -27,6 +28,7 @@ const client = new ApolloClient({
 
 const Body = styled.div`
   padding-top: 70px;
+  background: rgba(0, 0, 0, 0.01);
 `;
 
 function App() {
@@ -39,6 +41,7 @@ function App() {
             <Switch>
               <Route exact path='/' render={() => <Redirect to={{ pathname: '/events' }} />} />
               <Route path='/events' component={Events} />
+              <Route path='/event/:id' component={EventDetail} />
               <Route path='/createEvent' component={CreateEvent} />
               <Route path='/login' component={Signin} />
               <Route path='/signup' component={Signup} />

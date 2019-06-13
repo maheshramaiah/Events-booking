@@ -4,7 +4,8 @@ import history from '../../history';
 import { Input, DatePicker, TimePicker, MockPlace, Button } from '../../components';
 import { CREATE_EVENT, GET_EVENTS } from '../../query';
 import { useValidation } from './useValidation';
-import { Container, DateTime, ButtonWrap, Error } from './styles';
+import { Container } from '../styles';
+import { DateTime, ButtonWrap, Error } from './styles';
 
 function CreateEvent() {
   const date = useMemo(() => {

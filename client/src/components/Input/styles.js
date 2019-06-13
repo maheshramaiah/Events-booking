@@ -17,6 +17,7 @@ export const InputWrap = styled.div`
     box-sizing: border-box;
     border-radius: 4px;
     border: 1px solid rgba(0, 0, 0, 0.12);
+    background: transparent;
 
     &:focus {
       outline: none;

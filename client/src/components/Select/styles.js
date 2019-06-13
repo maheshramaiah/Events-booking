@@ -15,6 +15,7 @@ export const SelectWrap = styled.div`
     border: 1px solid rgba(0,0,0,0.12);
     border-radius: 4px;
     width: 100%;
+    background: transparent;
 
     &:focus {
       outline: none;

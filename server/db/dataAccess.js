@@ -35,9 +35,21 @@ async function find(collection, data) {
   }
 }
 
+async function updateOne(collection, query, options) {
+  try {
+    const res = await db.get().collection(collection).updateOne(query, options);
+
+    return res;
+  }
+  catch (err) {
+    return err;
+  }
+}
+
 
 module.exports = {
   insertOne,
   findOne,
-  find
+  find,
+  updateOne
 };

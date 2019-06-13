@@ -1,12 +1,19 @@
 import React, { Fragment } from 'react';
 import { Query } from 'react-apollo';
 import { Link } from 'react-router-dom';
+import history from '../../history';
 import { useAuth } from '../../contexts/AuthContext';
 import { GET_EVENTS } from '../../query';
-import { Banner, Container, Bar, Page, EventCreate, EventList, Name, Content } from './styles';
+import { dateParser } from '../utils';
+import { Container } from '../styles';
+import { Banner, Bar, Page, EventCreate, EventList, Name, Content } from './styles';
 
 function Events() {
   const [user] = useAuth();
+
+  function onEventClick(id) {
+    history.push(`/event/${id}`);
+  }
 
   return (
     <Fragment>
@@ -33,21 +40,12 @@ function Events() {
                   <EventList>
                     {
                       data.events.map(event => {
-                        const date = new Date(parseInt(event.startDate)).toLocaleString('en', {
-                          day: 'numeric',
-                          month: 'long',
-                          weekday: 'long',
-                          year: 'numeric',
-                          hour: 'numeric',
-                          minute: 'numeric'
-                        });
-
                         return (
-                          <li key={event.id}>
+                          <li key={event.id} onClick={() => onEventClick(event.id)}>
                             <Name>{event.name}</Name>
                             <Content>{event.description}</Content>
-                            <Content>{date}</Content>
-                            <Content>{event.location.address}</Content>
+                            <Content>{dateParser(event.startDate)}</Content>
+                            <Content>{event.participants.length} Member(s) going</Content>
                           </li>
                         )
                       })

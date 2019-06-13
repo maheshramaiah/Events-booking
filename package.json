@@ -28,6 +28,10 @@
       "MONGO_DB_PASSWORD": "mahesh_0084",
       "MONGO_DB": "events_booking",
       "JWT_KEY": "secret_1234"
-    }
+    },
+    "watch": [
+      "./server.js",
+      "./server/"
+    ]
   }
 }

@@ -7,7 +7,8 @@ function getInitialState() {
 
   return {
     isLoggedIn: !!token,
-    token
+    token,
+    info: null
   };
 }
 
@@ -27,6 +28,12 @@ function reducer(state, action) {
         ...state,
         isLoggedIn: false,
         token: null
+      }
+    }
+    case 'userInfo': {
+      return {
+        ...state,
+        info: action.user
       }
     }
   }

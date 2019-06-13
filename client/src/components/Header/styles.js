@@ -26,3 +26,11 @@ export const FloatRight = styled.div`
     margin: 0 5px;
   }
 `;
+
+export const FloatLeft = styled.div`
+  float: left;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  cursor: pointer;
+`;

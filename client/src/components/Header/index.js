@@ -3,7 +3,7 @@ import { Query } from 'react-apollo';
 import { useAuth } from '../../contexts/AuthContext';
 import history from '../../history';
 import { USER_INFO } from '../../query';
-import { HeaderWrap, FloatRight } from './styles';
+import { HeaderWrap, FloatLeft, FloatRight } from './styles';
 
 function Header() {
   const [user, dispatch] = useAuth();
@@ -21,6 +21,11 @@ function Header() {
     history.push('/');
   }
 
+  function onUserInfoSuccess({ user }) {
+    !user && logout();
+    dispatch({ type: 'userInfo', user })
+  }
+
   function renderSignButtons() {
     return (
       <Fragment>
@@ -33,7 +38,7 @@ function Header() {
 
   function renderProfile() {
     return (
-      <Query query={USER_INFO} fetchPolicy={'network-only'} onCompleted={({ user }) => !user && logout()} onError={logout}>
+      <Query query={USER_INFO} fetchPolicy={'network-only'} onCompleted={onUserInfoSuccess} onError={logout}>
         {
           ({ loading, error, data }) => (
             <div>
@@ -49,6 +54,9 @@ function Header() {
 
   return (
     <HeaderWrap>
+      <FloatLeft onClick={() => history.push('/')}>
+        Events
+      </FloatLeft>
       <FloatRight>
         {user.isLoggedIn ? renderProfile() : renderSignButtons()}
       </FloatRight>

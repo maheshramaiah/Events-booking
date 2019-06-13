@@ -1,10 +1,23 @@
-const { GraphQLList } = require('graphql');
+const { GraphQLNonNull, GraphQLList, GraphQLID } = require('graphql');
 const { EventType } = require('../types');
-const { getEvents } = require('../../service/event');
+const { getEvents, getEvent } = require('../../service/event');
 
 module.exports = {
-  type: new GraphQLList(EventType),
-  async resolve() {
-    return getEvents();
+  events: {
+    type: new GraphQLList(EventType),
+    async resolve() {
+      return getEvents();
+    }
+  },
+  event: {
+    type: EventType,
+    args: {
+      id: {
+        type: new GraphQLNonNull(GraphQLID)
+      }
+    },
+    async resolve(_, args) {
+      return getEvent(args.id);
+    }
   }
 };

@@ -59,3 +59,32 @@ export const GET_EVENTS = gql`
     }
   }
 `;
+
+export const GET_EVENT = gql`
+  query GetEvent($id: ID!) {
+    event(id: $id) {
+      id,
+      name,
+      description,
+      startDate,
+      endDate,
+      location {
+        address,
+        lat,
+        lng
+      },
+      participants,
+      creator {
+        id,
+        email,
+        name
+      }
+    }
+  }
+`;
+
+export const ADD_PARTICIPANT = gql`
+  mutation AddParticipant($id: ID!, $userId: ID!, $isAttending: Boolean) {
+    addParticipant(id: $id, userId: $userId, isAttending: $isAttending)
+  }
+`;

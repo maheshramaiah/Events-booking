@@ -14,16 +14,11 @@ export const Banner = styled.div`
   }
 `;
 
-export const Container = styled.div`
-	width: calc(100% - 750px);
-	margin: 0 auto;
-`;
-
 export const Bar = styled.div`
   background: #0f1721;
   padding: 5px 20px;
   min-height: 50px;
-  margin-top: -20px;
+  margin-top: -40px;
   position: sticky;
   top: 70px;
 `;
