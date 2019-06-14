@@ -81,7 +81,7 @@ export const GET_EVENT = gql`
 `;
 
 export const ADD_PARTICIPANT = gql`
-  mutation AddParticipant($id: ID!, $userId: ID!, $isAttending: Boolean) {
-    addParticipant(id: $id, userId: $userId, isAttending: $isAttending)
+  mutation AddParticipant($id: ID!, $userId: ID!, $isAttending: Boolean, $timezoneOffset: Int!) {
+    addParticipant(id: $id, userId: $userId, isAttending: $isAttending, timezoneOffset: $timezoneOffset)
   }
 `;

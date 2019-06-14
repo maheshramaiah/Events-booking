@@ -114,11 +114,16 @@ async function getEvent(id) {
   }
 }
 
-async function addParticipant({ id, userId, isAttending }) {
+async function addParticipant({ id, userId, isAttending, timezoneOffset }) {
   try {
+    const time = getTimeFromTimezoneOffset(timezoneOffset).getTime();
     const event = await getEvent(id);
     const isExisting = event.participants.includes(userId);
     let push;
+
+    if (time > +event.startDate) {
+      throw new Error('Cannot update! Event is either is in progress or past event.');
+    }
 
     if (isAttending) {
       if (isExisting) {

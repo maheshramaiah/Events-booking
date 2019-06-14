@@ -3,9 +3,13 @@ import { Query, Mutation } from 'react-apollo';
 import { useAuth } from '../../contexts/AuthContext';
 import { StaticMap, Button, Loader } from '../../components';
 import { GET_EVENT, ADD_PARTICIPANT } from '../../query';
-import { dateParser } from '../utils';
+import { dateParser, getTimezoneOffset } from '../utils';
 import { Container } from '../styles';
 import { Header, HeaderLeft, HeaderRight, Title, Author, Details, Description, Venue, Address, MapContainer } from './styles';
+
+function isUpcomingEvent(startDate) {
+  return +startDate > new Date().getTime();
+}
 
 function EventDetail(props) {
   const [user] = useAuth();
@@ -34,7 +38,8 @@ function EventDetail(props) {
           variables={{
             id,
             userId: user.info.id,
-            isAttending: !isAttended
+            isAttending: !isAttended,
+            timezoneOffset: getTimezoneOffset()
           }}
           refetchQueries={[{ query: GET_EVENT, variables: { id } }]}
         >
@@ -91,7 +96,7 @@ function EventDetail(props) {
                   {renderEventInfo(event)}
                 </HeaderLeft>
                 <HeaderRight>
-                  {user.isLoggedIn && renderEventParticipation(event)}
+                  {user.isLoggedIn && isUpcomingEvent(event.startDate) && renderEventParticipation(event)}
                 </HeaderRight>
               </Header>
               <Container>
