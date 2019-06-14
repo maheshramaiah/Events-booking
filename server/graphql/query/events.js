@@ -1,12 +1,24 @@
-const { GraphQLNonNull, GraphQLList, GraphQLID } = require('graphql');
-const { EventType } = require('../types');
+const { GraphQLNonNull, GraphQLList, GraphQLID, GraphQLString } = require('graphql');
+const { EventType, CategoryEnumType } = require('../types');
 const { getEvents, getEvent } = require('../../service/event');
 
 module.exports = {
   events: {
     type: new GraphQLList(EventType),
-    async resolve() {
-      return getEvents();
+    args: {
+      category: {
+        type: CategoryEnumType
+      },
+      time: {
+        type: new GraphQLNonNull(GraphQLString)
+      }
+    },
+    resolve(_, args, context) {
+      if (args.category === 0 && !context.isAuthenticated) {
+        throw new Error('Not authenticated');
+      }
+
+      return getEvents(args, context.user);
     }
   },
   event: {
@@ -16,7 +28,7 @@ module.exports = {
         type: new GraphQLNonNull(GraphQLID)
       }
     },
-    async resolve(_, args) {
+    resolve(_, args) {
       return getEvent(args.id);
     }
   }

@@ -5,7 +5,8 @@ const {
   GraphQLID,
   GraphQLNonNull,
   GraphQLList,
-  GraphQLFloat
+  GraphQLFloat,
+  GraphQLEnumType
 } = require('graphql');
 const { getUser } = require('../service/auth');
 
@@ -66,8 +67,27 @@ const EventInputType = new GraphQLInputObjectType({
   })
 });
 
+const CategoryEnumType = new GraphQLEnumType({
+  name: 'CategoryEnum',
+  values: {
+    MY: {
+      value: 0
+    },
+    UPCOMING: {
+      value: 1
+    },
+    ONGOING: {
+      value: 2
+    },
+    PAST: {
+      value: 3
+    }
+  }
+})
+
 module.exports = {
   UserType,
   EventType,
-  EventInputType
+  EventInputType,
+  CategoryEnumType
 };

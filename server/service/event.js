@@ -19,14 +19,37 @@ async function createEvent(event, userId) {
   }
 }
 
-async function getEvents() {
+async function getEvents({ category = 'all', time }, user) {
   try {
-    const events = await find(EVENT, {});
+    let options = {};
 
-    return events.map(event => ({
-      ...event,
-      id: event._id
-    }));
+    switch (category) {
+      case 0: {
+        options = { creator: user.id };
+        break;
+      }
+      case 1: {
+        options = { startDate: { $gt: time } };
+        break;
+      }
+      case 2: {
+        options = { startDate: { $lt: time }, endDate: { $gt: time } };
+        break;
+      }
+      case 3: {
+        options = { startDate: { $lt: time } };
+        break;
+      }
+    }
+
+    const events = await find(EVENT, options);
+
+    return events
+      .map(event => ({
+        ...event,
+        id: event._id
+      }))
+      .sort((a, b) => +a.startDate - +b.startDate);
   }
   catch (err) {
     return err;
