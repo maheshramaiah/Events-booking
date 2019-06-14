@@ -3,6 +3,7 @@ import { Mutation } from 'react-apollo';
 import history from '../../history';
 import { Input, DatePicker, TimePicker, MockPlace, Button } from '../../components';
 import { CREATE_EVENT, GET_EVENTS } from '../../query';
+import { getTimezoneOffset } from '../utils';
 import { useValidation } from './useValidation';
 import { Container } from '../styles';
 import { DateTime, ButtonWrap, Error } from './styles';
@@ -11,7 +12,7 @@ function CreateEvent() {
   const date = useMemo(() => {
     const now = new Date();
 
-    now.setHours(now.getHours() + 1, 0);
+    now.setHours(now.getHours() + 1, 0, 0, 0);
     return new Date(now);
   }, []);
   const [name, setName] = useState('');
@@ -51,7 +52,7 @@ function CreateEvent() {
       variables={getPayload()}
       onCompleted={onSuccess}
       onError={onError}
-      refetchQueries={[{ query: GET_EVENTS }]}
+      refetchQueries={[{ query: GET_EVENTS, variables: { category: 'UPCOMING', timezoneOffset: getTimezoneOffset(), search: '' } }]}
     >
       {
         (createEvent, { loading, error }) => (

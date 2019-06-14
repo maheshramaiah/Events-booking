@@ -19,3 +19,7 @@ export function debounce(fn, time) {
     }, time);
   }
 }
+
+export function getTimezoneOffset() {
+  return new Date().getTimezoneOffset() * -1;
+}

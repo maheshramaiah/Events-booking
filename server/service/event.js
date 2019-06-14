@@ -1,11 +1,44 @@
 const ObjectId = require('mongodb').ObjectID;
 const { EVENT } = require('../db/collections');
 const { insertOne, find, findOne, updateOne } = require('../db/dataAccess');
+const { getTimeFromTimezoneOffset } = require('../utils');
+
+const ERROR = 0.0001;
+
+async function isEventOverlapping({ startDate, endDate, location: { lat, lng } }) {
+  try {
+    const event = await findOne(EVENT,
+      {
+        $or: [
+          {
+            'startDate': { $lte: startDate },
+            'endDate': { $gte: startDate }
+          },
+          {
+            'startDate': { $lte: endDate },
+            'endDate': { $gte: endDate }
+          }
+        ],
+        'location.lat': { $gt: lat - ERROR, $lt: lat + ERROR },
+        'location.lng': { $gt: lng - ERROR, $lt: lng + ERROR }
+      }
+    );
+
+    if (event) {
+      throw new Error('Event with same slot already exists');
+    }
+  }
+  catch (err) {
+    throw err;
+  }
+}
 
 async function createEvent(event, userId) {
   try {
     event.creator = userId;
     event.participants = [];
+
+    await isEventOverlapping(event);
 
     const res = await insertOne(EVENT, event);
 
@@ -15,7 +48,7 @@ async function createEvent(event, userId) {
     }
   }
   catch (err) {
-    return err;
+    throw err;
   }
 }
 
@@ -44,8 +77,9 @@ function getCategoryOptions(category, time, user) {
   return options;
 }
 
-async function getEvents({ category, time, search }, user) {
+async function getEvents({ category, timezoneOffset, search }, user) {
   try {
+    const time = getTimeFromTimezoneOffset(timezoneOffset).getTime().toString();
     let options = getCategoryOptions(category, time, user);
 
     if (search) {
@@ -62,7 +96,7 @@ async function getEvents({ category, time, search }, user) {
       .sort((a, b) => +a.startDate - +b.startDate);
   }
   catch (err) {
-    return err;
+    throw err;
   }
 }
 
@@ -76,7 +110,7 @@ async function getEvent(id) {
     };
   }
   catch (err) {
-    return err;
+    throw err;
   }
 }
 
@@ -112,7 +146,7 @@ async function addParticipant({ id, userId, isAttending }) {
     return true;
   }
   catch (err) {
-    return err;
+    throw err;
   }
 }
 

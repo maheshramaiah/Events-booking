@@ -5,11 +5,10 @@ import history from '../../history';
 import { useAuth } from '../../contexts/AuthContext';
 import { Input, Loader } from '../../components';
 import { GET_EVENTS } from '../../query';
-import { dateParser } from '../utils';
+import { dateParser, getTimezoneOffset } from '../utils';
 import { Container } from '../styles';
 import { Banner, Bar, Page, EventCreate, EventList, Event, EventTime, EventDetail, Content, TabList } from './styles';
 
-const now = new Date().getTime().toString();
 const TABS = [
   { name: 'Upcoming Events', value: 'UPCOMING' },
   { name: 'Ongoing Events', value: 'ONGOING' },
@@ -98,12 +97,14 @@ function Events({ location }) {
         <Page>
           <Query
             query={GET_EVENTS}
-            variables={{ category, time: now, search }}
+            variables={{ category, timezoneOffset: getTimezoneOffset(), search }}
           >
             {
               ({ data, loading, error }) => {
                 if (loading) return <EventList><Loader /></EventList>
                 if (error) return <EventList>Error</EventList>
+
+                console.log(data);
 
                 return renderEventsList(data)
               }

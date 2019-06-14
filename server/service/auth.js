@@ -29,7 +29,7 @@ async function addUser({ name, email, password }) {
     return token;
   }
   catch (err) {
-    return err;
+    throw err;
   }
 }
 
@@ -50,7 +50,7 @@ async function verifyUser({ email, password }) {
     return await getToken(user._id, user.name, user.email);
   }
   catch (err) {
-    return err;
+    throw err;
   }
 }
 
@@ -64,7 +64,7 @@ async function getUser(id) {
     };
   }
   catch (err) {
-    return err;
+    throw err;
   }
 }
 

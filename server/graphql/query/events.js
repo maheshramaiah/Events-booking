@@ -1,4 +1,4 @@
-const { GraphQLNonNull, GraphQLList, GraphQLID, GraphQLString } = require('graphql');
+const { GraphQLNonNull, GraphQLList, GraphQLID, GraphQLString, GraphQLInt } = require('graphql');
 const { EventType, CategoryEnumType } = require('../types');
 const { getEvents, getEvent } = require('../../service/event');
 
@@ -9,8 +9,8 @@ module.exports = {
       category: {
         type: CategoryEnumType
       },
-      time: {
-        type: new GraphQLNonNull(GraphQLString)
+      timezoneOffset: {
+        type: new GraphQLNonNull(GraphQLInt)
       },
       search: {
         type: GraphQLString

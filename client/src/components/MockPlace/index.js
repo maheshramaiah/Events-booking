@@ -10,8 +10,8 @@ function MockPlace({ label, onChange }) {
     if (place) {
       location = {
         address: place.address_components.map(d => d.long_name).join(', '),
-        lat: place.geometry.location.lat,
-        lng: place.geometry.location.lng
+        lat: +place.geometry.location.lat.toFixed(4),
+        lng: +place.geometry.location.lng.toFixed(4)
       };
     }
 
