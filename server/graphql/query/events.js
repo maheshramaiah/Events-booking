@@ -11,6 +11,9 @@ module.exports = {
       },
       time: {
         type: new GraphQLNonNull(GraphQLString)
+      },
+      search: {
+        type: GraphQLString
       }
     },
     resolve(_, args, context) {

@@ -21,6 +21,15 @@ export const Bar = styled.div`
   margin-top: -40px;
   position: sticky;
   top: 70px;
+
+  &>div {
+    display: inline-block;
+  }
+
+  input {
+    background: #fff;
+    width: 300px;
+  }
 `;
 
 export const EventCreate = styled.h4`
@@ -62,7 +71,7 @@ export const Event = styled.div`
 export const EventTime = styled.div`
   flex: 0.2;
   max-width: 120px;
-  
+
   p {
     white-space: pre-wrap;
   }

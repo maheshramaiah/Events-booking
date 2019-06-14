@@ -1,8 +1,9 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { Query } from 'react-apollo';
 import { Link } from 'react-router-dom';
 import history from '../../history';
 import { useAuth } from '../../contexts/AuthContext';
+import { Input, Loader } from '../../components';
 import { GET_EVENTS } from '../../query';
 import { dateParser } from '../utils';
 import { Container } from '../styles';
@@ -20,6 +21,7 @@ function Events({ location }) {
   const params = new URLSearchParams(location.search);
   const category = params.get('category') || TABS[0].value;
   const [user] = useAuth();
+  const [search, setSearch] = useState('');
 
   function onEventClick(id) {
     history.push(`/event/${id}`);
@@ -82,6 +84,10 @@ function Events({ location }) {
       </Banner>
       <Container>
         <Bar className="clearfix">
+          <Input
+            onEnter={value => setSearch(value)}
+            placeholder='Search'
+          />
           {
             user.isLoggedIn &&
             <EventCreate>
@@ -92,11 +98,11 @@ function Events({ location }) {
         <Page>
           <Query
             query={GET_EVENTS}
-            variables={{ category, time: now }}
+            variables={{ category, time: now, search }}
           >
             {
               ({ data, loading, error }) => {
-                if (loading) return <EventList>Loading ...</EventList>
+                if (loading) return <EventList><Loader /></EventList>
                 if (error) return <EventList>Error</EventList>
 
                 return renderEventsList(data)

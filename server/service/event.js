@@ -19,27 +19,37 @@ async function createEvent(event, userId) {
   }
 }
 
-async function getEvents({ category = 'all', time }, user) {
-  try {
-    let options = {};
+function getCategoryOptions(category, time, user) {
+  let options = {};
 
-    switch (category) {
-      case 0: {
-        options = { creator: user.id };
-        break;
-      }
-      case 1: {
-        options = { startDate: { $gt: time } };
-        break;
-      }
-      case 2: {
-        options = { startDate: { $lt: time }, endDate: { $gt: time } };
-        break;
-      }
-      case 3: {
-        options = { startDate: { $lt: time } };
-        break;
-      }
+  switch (category) {
+    case 0: { //My
+      options = { creator: user.id };
+      break;
+    }
+    case 1: { // Upcoming
+      options = { startDate: { $gt: time } };
+      break;
+    }
+    case 2: { //Ongoing
+      options = { startDate: { $lt: time }, endDate: { $gt: time } };
+      break;
+    }
+    case 3: { //Past
+      options = { startDate: { $lt: time } };
+      break;
+    }
+  }
+
+  return options;
+}
+
+async function getEvents({ category, time, search }, user) {
+  try {
+    let options = getCategoryOptions(category, time, user);
+
+    if (search) {
+      options = { ...options, name: { $regex: `.*${search}.*` } }
     }
 
     const events = await find(EVENT, options);

@@ -7,3 +7,15 @@ export function dateParser(date) {
     minute: 'numeric'
   });
 }
+
+export function debounce(fn, time) {
+  let timeout;
+
+  return (...args) => {
+    timeout && clearTimeout(timeout);
+
+    timeout = setTimeout(() => {
+      fn.apply(null, args);
+    }, time);
+  }
+}

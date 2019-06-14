@@ -5,6 +5,7 @@ import DatePicker from './DateTimePicker/DatePicker';
 import TimePicker from './DateTimePicker/TimePicker';
 import MockPlace from './MockPlace';
 import StaticMap from './StaticMap';
+import Loader from './Loader';
 
 export {
   Input,
@@ -13,5 +14,6 @@ export {
   DatePicker,
   TimePicker,
   MockPlace,
-  StaticMap
+  StaticMap,
+  Loader
 };

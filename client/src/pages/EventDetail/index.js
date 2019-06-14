@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { Query, Mutation } from 'react-apollo';
 import { useAuth } from '../../contexts/AuthContext';
-import { StaticMap, Button } from '../../components';
+import { StaticMap, Button, Loader } from '../../components';
 import { GET_EVENT, ADD_PARTICIPANT } from '../../query';
 import { dateParser } from '../utils';
 import { Container } from '../styles';
@@ -79,7 +79,7 @@ function EventDetail(props) {
     >
       {
         ({ data, loading, error }) => {
-          if (loading) return <div>Loading ...</div>
+          if (loading) return <Loader />
           if (error) return <div>Error</div>
 
           const { event } = data;

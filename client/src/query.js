@@ -46,8 +46,8 @@ export const CREATE_EVENT = gql`
 `;
 
 export const GET_EVENTS = gql`
-  query GetEvents($category: CategoryEnum!, $time: String!) {
-    events(category: $category, time: $time) {
+  query GetEvents($category: CategoryEnum!, $time: String!, $search: String) {
+    events(category: $category, time: $time, search: $search) {
       id,
       name,
       description,
