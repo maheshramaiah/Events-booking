@@ -83,7 +83,7 @@ async function getEvents({ category, timezoneOffset, search }, user) {
     let options = getCategoryOptions(category, time, user);
 
     if (search) {
-      options = { ...options, name: { $regex: `.*${search}.*` } }
+      options = { ...options, name: { $regex: `.*${search.toLowerCase()}.*`, $options : 'i' } }
     }
 
     const events = await find(EVENT, options);
@@ -122,7 +122,7 @@ async function addParticipant({ id, userId, isAttending, timezoneOffset }) {
     let push;
 
     if (time > +event.startDate) {
-      throw new Error('Cannot update! Event is either is in progress or past event.');
+      throw new Error('Cannot update! Event is either in progress or past.');
     }
 
     if (isAttending) {

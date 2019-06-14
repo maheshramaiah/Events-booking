@@ -104,8 +104,6 @@ function Events({ location }) {
                 if (loading) return <EventList><Loader /></EventList>
                 if (error) return <EventList>Error</EventList>
 
-                console.log(data);
-
                 return renderEventsList(data)
               }
             }
