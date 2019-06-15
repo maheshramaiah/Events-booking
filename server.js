@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const graphqlHTTP = require('express-graphql');
@@ -26,6 +27,12 @@ app.use('/graphql', middlewares, (req, res) => {
       message: error.message
     })
   })(req, res)
+});
+
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/index.html'));
 });
 
 (async function() {

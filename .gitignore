@@ -3,3 +3,4 @@ ui/node_modules
 .vscode
 schema.txt
 graphql/ex.txt
+public
