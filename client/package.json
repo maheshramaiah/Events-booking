@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server",
-    "prod": "webpack --mode='production'"
+    "prod": "webpack --mode='production' && rimraf ../public/**/*.map"
   },
   "author": "Mahesh Ramaiah",
   "license": "ISC",
