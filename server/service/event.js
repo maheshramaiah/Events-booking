@@ -80,10 +80,13 @@ function getCategoryOptions(category, time, user) {
 async function getEvents({ category, timezoneOffset, search }, user) {
   try {
     const time = getTimeFromTimezoneOffset(timezoneOffset).getTime().toString();
+
+    console.log(`Current Time: ${time}`);
+
     let options = getCategoryOptions(category, time, user);
 
     if (search) {
-      options = { ...options, name: { $regex: `.*${search.toLowerCase()}.*`, $options : 'i' } }
+      options = { ...options, name: { $regex: `.*${search.toLowerCase()}.*`, $options: 'i' } }
     }
 
     const events = await find(EVENT, options);
