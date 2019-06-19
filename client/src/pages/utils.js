@@ -21,5 +21,5 @@ export function debounce(fn, time) {
 }
 
 export function getTimezoneOffset() {
-  return new Date().getTimezoneOffset() * -1;
+  return new Date().getTimezoneOffset();
 }
