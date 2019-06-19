@@ -9,9 +9,6 @@ module.exports = {
       category: {
         type: CategoryEnumType
       },
-      timezoneOffset: {
-        type: new GraphQLNonNull(GraphQLInt)
-      },
       search: {
         type: GraphQLString
       }

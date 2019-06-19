@@ -5,7 +5,7 @@ import history from '../../history';
 import { useAuth } from '../../contexts/AuthContext';
 import { Input, Loader } from '../../components';
 import { GET_EVENTS } from '../../query';
-import { dateParser, getTimezoneOffset } from '../utils';
+import { dateParser } from '../utils';
 import { Container } from '../styles';
 import { Banner, Bar, Page, EventCreate, EventList, Event, EventTime, EventDetail, Content, TabList } from './styles';
 
@@ -97,7 +97,7 @@ function Events({ location }) {
         <Page>
           <Query
             query={GET_EVENTS}
-            variables={{ category, timezoneOffset: getTimezoneOffset(), search }}
+            variables={{ category, search }}
           >
             {
               ({ data, loading, error }) => {

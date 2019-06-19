@@ -46,8 +46,8 @@ export const CREATE_EVENT = gql`
 `;
 
 export const GET_EVENTS = gql`
-  query GetEvents($category: CategoryEnum!, $timezoneOffset: Int!, $search: String) {
-    events(category: $category, timezoneOffset: $timezoneOffset, search: $search) {
+  query GetEvents($category: CategoryEnum!, $search: String) {
+    events(category: $category, search: $search) {
       id,
       name,
       description,
@@ -81,7 +81,7 @@ export const GET_EVENT = gql`
 `;
 
 export const ADD_PARTICIPANT = gql`
-  mutation AddParticipant($id: ID!, $userId: ID!, $isAttending: Boolean, $timezoneOffset: Int!) {
-    addParticipant(id: $id, userId: $userId, isAttending: $isAttending, timezoneOffset: $timezoneOffset)
+  mutation AddParticipant($id: ID!, $userId: ID!, $isAttending: Boolean) {
+    addParticipant(id: $id, userId: $userId, isAttending: $isAttending)
   }
 `;

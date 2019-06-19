@@ -3,7 +3,6 @@ import { Mutation } from 'react-apollo';
 import history from '../../history';
 import { Input, DatePicker, TimePicker, MockPlace, Button } from '../../components';
 import { CREATE_EVENT, GET_EVENTS } from '../../query';
-import { getTimezoneOffset } from '../utils';
 import { useValidation } from './useValidation';
 import { Container } from '../styles';
 import { DateTime, ButtonWrap, Error } from './styles';
@@ -52,7 +51,7 @@ function CreateEvent() {
       variables={getPayload()}
       onCompleted={onSuccess}
       onError={onError}
-      refetchQueries={[{ query: GET_EVENTS, variables: { category: 'UPCOMING', timezoneOffset: getTimezoneOffset(), search: '' } }]}
+      refetchQueries={[{ query: GET_EVENTS, variables: { category: 'UPCOMING', search: '' } }]}
     >
       {
         (createEvent, { loading, error }) => (

@@ -1,7 +1,7 @@
 const ObjectId = require('mongodb').ObjectID;
 const { EVENT } = require('../db/collections');
 const { insertOne, find, findOne, updateOne } = require('../db/dataAccess');
-const { getTimeStampFromTimezoneOffset } = require('../utils');
+const { getUnixTimestamp } = require('../utils');
 
 const ERROR = 0.0001;
 
@@ -77,12 +77,9 @@ function getCategoryOptions(category, time, user) {
   return options;
 }
 
-async function getEvents({ category, timezoneOffset, search }, user) {
+async function getEvents({ category, search }, user) {
   try {
-    const time = getTimeStampFromTimezoneOffset(timezoneOffset).toString();
-
-    console.log(`Current Time: ${time}`);
-
+    const time = getUnixTimestamp().toString();
     let options = getCategoryOptions(category, time, user);
 
     if (search) {
@@ -117,9 +114,9 @@ async function getEvent(id) {
   }
 }
 
-async function addParticipant({ id, userId, isAttending, timezoneOffset }) {
+async function addParticipant({ id, userId, isAttending }) {
   try {
-    const time = getTimeStampFromTimezoneOffset(timezoneOffset);
+    const time = getUnixTimestamp();
     const event = await getEvent(id);
     const isExisting = event.participants.includes(userId);
     let push;

@@ -28,8 +28,7 @@ module.exports = {
     args: {
       id: { type: new GraphQLNonNull(GraphQLID) },
       userId: { type: new GraphQLNonNull(GraphQLID) },
-      isAttending: { type: GraphQLBoolean },
-      timezoneOffset: { type: new GraphQLNonNull(GraphQLInt) }
+      isAttending: { type: GraphQLBoolean }
     },
     resolve(_, args, context) {
       try {

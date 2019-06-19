@@ -3,7 +3,7 @@ import { Query, Mutation } from 'react-apollo';
 import { useAuth } from '../../contexts/AuthContext';
 import { StaticMap, Button, Loader } from '../../components';
 import { GET_EVENT, ADD_PARTICIPANT } from '../../query';
-import { dateParser, getTimezoneOffset } from '../utils';
+import { dateParser } from '../utils';
 import { Container } from '../styles';
 import { Header, HeaderLeft, HeaderRight, Title, Author, Details, Description, Venue, Address, MapContainer } from './styles';
 
@@ -38,8 +38,7 @@ function EventDetail(props) {
           variables={{
             id,
             userId: user.info.id,
-            isAttending: !isAttended,
-            timezoneOffset: getTimezoneOffset()
+            isAttending: !isAttended
           }}
           refetchQueries={[{ query: GET_EVENT, variables: { id } }]}
         >
