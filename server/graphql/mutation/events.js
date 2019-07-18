@@ -1,4 +1,4 @@
-const { GraphQLNonNull, GraphQLID, GraphQLBoolean, GraphQLInt } = require('graphql');
+const { GraphQLNonNull, GraphQLID, GraphQLBoolean } = require('graphql');
 const { EventType, EventInputType } = require('../types');
 const { createEvent, addParticipant } = require('../../service/event');
 

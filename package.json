@@ -1,10 +1,10 @@
 {
-  "name": "graphql",
+  "name": "eventsbooking",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "source env.sh && nodemon server.js",
     "debug": "nodemon --debug server.js"
   },
   "keywords": [],
@@ -23,12 +23,6 @@
     "nodemon": "^1.19.1"
   },
   "nodemonConfig": {
-    "env": {
-      "MONGO_DB_USER": "Mahesh0084",
-      "MONGO_DB_PASSWORD": "mahesh_0084",
-      "MONGO_DB": "events_booking",
-      "JWT_KEY": "secret_1234"
-    },
     "watch": [
       "./server.js",
       "./server/"

@@ -18,7 +18,7 @@ app.use('/graphql', middlewares, (req, res) => {
       query,
       mutation
     }),
-    graphiql: true,
+    graphiql: process.env.MODE === 'development',
     context: {
       isAuthenticated: req.isAuthenticated,
       user: req.user
