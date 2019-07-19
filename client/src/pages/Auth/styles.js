@@ -23,8 +23,28 @@ export const Form = styled.div`
   }
 `;
 
-export const Error = styled.span`
+export const Error = styled.div`
   font-size: 12px;
-  margin-left: 10px;
+  margin-top: 10px;
   color: red;
+`;
+
+export const ForgotPassword = styled.a`
+  color: blue;
+  font-size: 12px;
+  margin-left: 12px;
+  cursor: pointer;
+`;
+
+export const PasswordReset = styled.div`
+  padding: 20px;
+
+  h2 {
+    margin-top: 0;
+  }
+`;
+
+export const Message = styled.span`
+  margin-left: 10px;
+  font-ssize: 12px;
 `;

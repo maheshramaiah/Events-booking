@@ -6,13 +6,15 @@ const { GraphQLSchema } = require('graphql');
 const query = require('./server/graphql/query');
 const mutation = require('./server/graphql/mutation');
 const db = require('./server/db');
+const api = require('./server/api');
 const { authenticateUser } = require('./server/middleware');
 
 const app = express();
 const port = process.env.PORT || 3000;
 const middlewares = [bodyParser.json(), authenticateUser];
 
-app.use('/graphql', middlewares, (req, res) => {
+app.use(...middlewares);
+app.use('/graphql', (req, res) => {
   graphqlHTTP({
     schema: new GraphQLSchema({
       query,
@@ -28,9 +30,8 @@ app.use('/graphql', middlewares, (req, res) => {
     })
   })(req, res)
 });
-
+app.use('/api', api);
 app.use(express.static(path.join(__dirname, 'public')));
-
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public/index.html'));
 });
