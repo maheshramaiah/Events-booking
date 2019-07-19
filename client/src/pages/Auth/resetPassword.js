@@ -26,12 +26,14 @@ function ResetPassword(props) {
       <Input
         label='New Password'
         placeholder='New Password'
+        type='password'
         value={newPassword}
         onChange={val => setNewPassword(val)}
       />
       <Input
         label='Confirm Password'
         placeholder='Confirm Password'
+        type='password'
         value={confirmPassword}
         onChange={val => setConfirmPassword(val)}
       />
