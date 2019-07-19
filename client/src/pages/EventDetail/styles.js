@@ -4,6 +4,19 @@ export const Header = styled.div`
   display: flex;
   padding: 20px 370px 50px 370px;
   background: #fff;
+
+  @media (max-width: 1600px) {
+    padding-left: 200px;
+    padding-right: 200px;
+   }
+  @media (max-width: 1024px) {
+    padding-left: 100px;
+    padding-right: 100px;
+  }
+  @media (max-width: 768px) {
+    padding-left: 25px;
+    padding-right: 25px;
+  }
 `;
 
 export const HeaderLeft = styled.div`
@@ -38,6 +51,10 @@ export const Author = styled.p`
 
 export const Details = styled.div`
   display: flex;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 export const Description = styled.div`

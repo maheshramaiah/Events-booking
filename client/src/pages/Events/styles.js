@@ -15,6 +15,8 @@ export const Banner = styled.div`
 `;
 
 export const Bar = styled.div`
+  display: flex;
+  justify-content: space-between;
   background: #0f1721;
   padding: 5px 20px;
   min-height: 50px;
@@ -22,13 +24,16 @@ export const Bar = styled.div`
   position: sticky;
   top: 70px;
 
-  &>div {
-    display: inline-block;
-  }
-
   input {
     background: #fff;
-    width: 300px;
+  }
+
+  &>div {
+    flex: 0.5;
+
+    @media (max-width: 768px) {
+      flex: 0.8;
+    }
   }
 `;
 

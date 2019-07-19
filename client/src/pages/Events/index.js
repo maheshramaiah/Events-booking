@@ -82,7 +82,7 @@ function Events({ location }) {
         <h2>Find your next event</h2>
       </Banner>
       <Container>
-        <Bar className="clearfix">
+        <Bar>
           <Input
             onEnter={value => setSearch(value)}
             placeholder='Search'

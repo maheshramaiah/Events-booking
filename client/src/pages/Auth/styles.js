@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const LoginWrap = styled.div`
-  width: 460px;
+  max-width: 460px;
   margin 50px auto 0 auto;
   border: 1px solid rgba(0, 0, 0, 0.12)
 `;
