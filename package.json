@@ -6,8 +6,7 @@
   "scripts": {
     "start": "source env.sh && nodemon server.js",
     "debug": "nodemon --debug server.js",
-    "heroku-prebuild": "export NPM_CONFIG_PRODUCTION=false;",
-    "heroku-postbuild": "cd ./client && npm install && npm run prod"
+    "heroku-postbuild": "cd ./client && export NPM_CONFIG_PRODUCTION=false && npm install && npm run prod"
   },
   "keywords": [],
   "author": "Mahesh Ramaiah",
