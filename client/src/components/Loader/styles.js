@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Spinner_svg from '../../assets/Spinner.svg';
 
 export const LoaderWrap = styled.div`
   position: absolute;
@@ -12,7 +13,7 @@ export const LoaderWrap = styled.div`
 `;
 
 export const Spinner = styled.div`
-  background: url('../../assets/Spinner.svg');
+  background: url(${Spinner_svg});
   background-repeat: no-repeat;
   width: 100px;
   width: 100px;
